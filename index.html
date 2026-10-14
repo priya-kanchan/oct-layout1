@@ -102,21 +102,28 @@
         </div>
       </div>
 
-      <form class="hero-form glass reveal" data-form>
-        <h3>Book a Site Visit</h3>
-        <p>Get exclusive pre-launch offers</p>
-        <div class="field"><i class="fa-regular fa-user"></i><input type="text" placeholder="Full Name" required />
+      <form class="hero-form glass reveal" id="heroLeadForm">
+        <span class="eyebrow">Private Preview</span>
+        <h3>Get in Touch with Us</h3>
+        <p>Share your details and our team will be in touch.</p>
+        <div class="field"><i class="fa-regular fa-user"></i><input id="qSenderName1" name="name" type="text"
+            placeholder="Enter Name" autocomplete="name" required /></div>
+        <div class="field"><i class="fa-regular fa-envelope"></i><input id="qEmailID1" name="email" type="email"
+            placeholder="Enter Email" autocomplete="email" required /></div>
+        <div class="field phone-field">
+          <i class="fa-solid fa-phone"></i>
+          <input id="qCountryCode1" name="qCountryCode1" type="hidden" value="+91" />
+          <span class="dial-code" aria-label="Country code India, plus 91">🇮🇳 +91</span>
+          <input id="qMobileNo1" name="number" type="tel" placeholder="Enter Number" autocomplete="tel-national"
+              inputmode="numeric" pattern="[0-9]{10}" data-countrycode-id="qCountryCode1" required />
         </div>
-        <div class="field"><i class="fa-solid fa-phone"></i><input type="tel" placeholder="Mobile Number"
-            pattern="[0-9+\s]{10,14}" required /></div>
-        <div class="field"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="Email Address"
-            required /></div>
-        <div class="field" bis_skin_checked="1"><i class="fa-solid fa-message"></i><input type="tel"
-            placeholder="Message" required=""></div>
-        <button type="submit" class="btn btn-primary btn-block ripple">Get Callback <i
+        <div class="field"><i class="fa-solid fa-message"></i><textarea id="qMessage1" name="message"
+            placeholder="Enter Message" rows="2" required></textarea></div>
+        <button id="SubmitQuery1" type="submit" class="btn btn-primary btn-block ripple submit_btn">Submit Now <i
             class="fa-solid fa-arrow-right"></i></button>
-        <label class="check"><input type="checkbox" required=""> I authorize company representatives to Call, SMS, Email or
-        WhatsApp me about its products and offers.This consent overrides any registration for DNC/NDNC.</label>
+        <label class="check"><input id="leadConsent1" name="consent" type="checkbox" value="yes" required />
+          I authorize company representatives to Call, SMS, Email or WhatsApp me about its products and offers. This
+          consent overrides any registration for DNC/NDNC.</label>
       </form>
     </div>
 
@@ -621,21 +628,29 @@
   <!-- ================= ENQUIRY MODAL ================= -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
-    <form class="modal-box glass" data-form role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form class="modal-box glass" id="modalLeadForm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button type="button" class="modal-close" data-close-modal aria-label="Close"><i
           class="fa-solid fa-xmark"></i></button>
       <div class="icon-bubble"><i class="fa-solid fa-droplet"></i></div>
       <h3 id="modalTitle">Project Name</h3>
       <p>Our relationship manager will call you within 30 minutes.</p>
-      <div class="field"><i class="fa-regular fa-user"></i><input type="text" placeholder="Full Name" required /></div>
-      <div class="field"><i class="fa-solid fa-phone"></i><input type="tel" placeholder="Mobile Number"
-          pattern="[0-9+\s]{10,14}" required /></div>
-      <div class="field"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="Email Address"
-          required /></div>
-      <div class="field"><i class="fa-solid fa-message"></i><input type="tel" placeholder="Message" required /></div>
-      <label class="check"><input type="checkbox" required /> I authorize company representatives to Call, SMS, Email or
-        WhatsApp me about its products and offers.This consent overrides any registration for DNC/NDNC.</label>
-      <button type="submit" class="btn btn-primary btn-block ripple">Submit <i
+      <div class="field"><i class="fa-regular fa-user"></i><input id="qSenderName2" name="name" type="text"
+          placeholder="Enter Name" autocomplete="name" required /></div>
+      <div class="field"><i class="fa-regular fa-envelope"></i><input id="qEmailID2" name="email" type="email"
+          placeholder="Enter Email" autocomplete="email" required /></div>
+      <div class="field phone-field">
+        <i class="fa-solid fa-phone"></i>
+        <input id="qCountryCode2" name="qCountryCode2" type="hidden" value="+91" />
+        <span class="dial-code" aria-label="Country code India, plus 91">🇮🇳 +91</span>
+        <input id="qMobileNo2" name="number" type="tel" placeholder="Enter Number" autocomplete="tel-national"
+          inputmode="numeric" pattern="[0-9]{10}" data-countrycode-id="qCountryCode2" required />
+      </div>
+      <div class="field"><i class="fa-solid fa-message"></i><textarea id="qMessage2" name="message"
+          placeholder="Enter Message" rows="2" required></textarea></div>
+      <label class="check"><input id="leadConsent2" name="consent" type="checkbox" value="yes" required />
+        I authorize company representatives to Call, SMS, Email or WhatsApp me about its products and offers. This
+        consent overrides any registration for DNC/NDNC.</label>
+      <button id="SubmitQuery2" type="submit" class="btn btn-primary btn-block ripple submit_btn">Submit Now <i
           class="fa-solid fa-arrow-right"></i></button>
     </form>
   </div>
@@ -650,10 +665,52 @@
     <button class="lb-btn lb-next glass" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
   </div>
 
-  <div class="toast glass" id="toast"><i class="fa-solid fa-circle-check"></i> Thank you! We'll get in touch shortly.
-  </div>
-
   <script src="js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    var versionUpdate = (new Date()).getTime();
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://api2.gtftech.com/scripts/queryform.min.ssl.js?v=" + versionUpdate;
+    document.body.appendChild(script);
+    });
+  </script>
+  <script>
+    var AgentInfo = {
+      "vAgentID": "4687",
+      "vProject": "M3M the Cullinan",
+      "vURL": "https://m3mthecullinannoida94.com/test/",
+      "thankspageurl": "https://m3mthecullinannoida94.com/test/thanks.htm",
+    };
+    //Needs to be duplicate in the case of multiple forms on the same page
+    //--------------------------------------------------------------------------------------//
+    document.addEventListener("DOMContentLoaded", function () {
+      $('#preferedtime').hide();
+      $("#SubmitQuery1").click(function () {
+        var FormInfo = {
+          "SenderControlID": "qSenderName1",
+          "SenderControlMobileID": "qMobileNo1",
+          "SenderControlEmailID": "qEmailID1",
+          "SenderControlCountryCodeID": "qCountryCode1",
+          "SenderControlTimeID": "qtimeslot1",
+          "SenderControlMsgID": "qMessage1"
+        };
+        SubmitQueryData(AgentInfo, FormInfo);
+      });
+      $("#SubmitQuery2").click(function () {
+        var FormInfo = {
+          "SenderControlID": "qSenderName2",
+          "SenderControlMobileID": "qMobileNo2",
+          "SenderControlEmailID": "qEmailID2",
+          "SenderControlCountryCodeID": "qCountryCode2",
+          "SenderControlTimeID": "qtimeslot2",
+          "SenderControlMsgID": "qMessage2"
+        };
+        SubmitQueryData(AgentInfo, FormInfo);
+      });
+    });
+  </script>
 </body>
 
 </html>

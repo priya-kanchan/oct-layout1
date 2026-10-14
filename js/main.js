@@ -282,15 +282,4 @@
     })
   );
 
-  /* ---------- Forms (demo submit) ---------- */
-  const toast = $("#toast");
-  $$("[data-form]").forEach((form) =>
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      form.reset();
-      closeModal();
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3200);
-    })
-  );
 })();
